@@ -15,7 +15,9 @@
     "core-js": "^3.8.1",
     "moment": "^2.24.0",
     "nuxt": "^2.14.6",
-    "nuxt-i18n": "^6.5.0"
+    "nuxt-i18n": "^6.5.0",
+    "oidc-client": "^1.10.1",
+    "vuex-oidc": "^3.10.1"
   },
   "devDependencies": {
     "@babel/helper-compilation-targets": "^7.10.4",
