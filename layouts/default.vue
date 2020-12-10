@@ -1,8 +1,8 @@
 <template>
   <v-app light>
-    <my-header />
+    <!-- <my-header /> -->
     <v-main>
-      <v-content >
+      <v-content>
         <v-container>
           <nuxt />
         </v-container>
@@ -18,7 +18,7 @@ import MyFooter from "~/components/main-component/my-footer.vue";
 export default {
   components: {
     MyHeader,
-    MyFooter,
+    MyFooter
   },
   data() {
     return {
@@ -28,8 +28,14 @@ export default {
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: "Vuetify.js",
+      title: "Vuetify.js"
     };
-  },
+  }
 };
 </script>
+
+<style lang="scss" scoped>
+.v-main .v-content {
+  padding: 0 0 30px 0 !important;
+}
+</style>
