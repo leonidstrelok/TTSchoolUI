@@ -1,6 +1,6 @@
 import { vuexOidcCreateStoreModule } from 'vuex-oidc'
 import { oidcSettings } from '@/config/oidc'
-const publicRoutes = ["index"]
+const publicRoutes = ["index,lessons"]
 
 const storeModule = vuexOidcCreateStoreModule(
   oidcSettings,

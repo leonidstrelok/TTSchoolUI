@@ -53,6 +53,6 @@ export default {
   build: {
   },
   router: {
-    middleware: ['oidc-router', 'oidc-callback']
+    // middleware: ['oidc-router', 'oidc-callback']
   }
 }
