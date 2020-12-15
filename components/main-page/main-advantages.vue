@@ -67,7 +67,7 @@
   display: flex;
   justify-content: center;
   .photo {
-    width: 90%;
+    min-width: 90%;
     border-radius: 20px;
     overflow: hidden;
   }

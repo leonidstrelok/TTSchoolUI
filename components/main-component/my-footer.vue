@@ -8,14 +8,16 @@
       </v-card-text>
     </v-card>
     <div class="cont">
-      <div class="policy">
-        <a class="link">Terms of Service Agreement</a>
-        <a class="link">Privacy Policy</a>
-      </div>
       <div class="contacts">
         <v-btn v-for="(item, index) in contacts" :key="index" class="mx-4" icon>
           <v-icon size="30px">{{ item.icon }}</v-icon>
         </v-btn>
+      </div>
+      <div class="policy">
+        <a class="link">Terms of Service Agreement</a>
+        <a class="link">
+          <PrivacyPolicy />
+        </a>
       </div>
       <div class="copyright">Copyright © QOMPLX, Inc. 2020 All rights reserved</div>
     </div>
@@ -23,7 +25,11 @@
 </template>
 
 <script>
+import PrivacyPolicy from "~/components/main-component/privacy-policy.vue";
 export default {
+  components: {
+    PrivacyPolicy
+  },
   data: () => ({
     active: false,
     contacts: [
@@ -40,25 +46,37 @@ export default {
         title: "Welcome",
         to: "/"
       },
-      // {
-      //   icon: "mdi-hail",
-      //   title: "Inspire",
-      //   to: "/about-us",
-      // },
       {
         icon: "mdi-book-open-variant",
         title: "Inspire",
         to: "/lessons"
+      },
+      {
+        icon: "mdi-hail",
+        title: "Inspire",
+        to: "/cabinet"
       }
     ]
   }),
+  computed: {
+    path() {
+      return this.$route;
+    }
+  },
+  watch: {
+    path() {
+      setTimeout(() => {
+        this.active = false;
+      }, 100);
+    }
+  },
   created() {
     document.addEventListener("scroll", e => {
       let clientHeight = document.scrollingElement.clientHeight;
       let scrollTop = document.scrollingElement.scrollTop;
-      let scrollHeight = document.scrollingElement.scrollHeight - 300;
-      let pageEnd = clientHeight + scrollTop - 300;
-      if (pageEnd == scrollHeight) {
+      let scrollHeight = document.scrollingElement.scrollHeight;
+      let pageEnd = Math.ceil(clientHeight + scrollTop);
+      if (pageEnd == scrollHeight && this.path.path == "/") {
         this.active = true;
       } else {
         this.active = false;
@@ -100,6 +118,10 @@ footer {
     justify-content: flex-end;
   }
   .contacts {
+    display: flex;
+    // justify-content: center;
+  }
+  .policy {
     display: flex;
     justify-content: center;
   }
