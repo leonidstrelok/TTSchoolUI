@@ -1,6 +1,6 @@
 <template>
-  <!-- <RegistrationForm /> -->
-  <CabinetForm />
+  <!-- <RegistrationForm /> <CabinetForm />  -->
+  <RegistrationForm />
 </template>
 
 <script>
@@ -9,7 +9,7 @@ import CabinetForm from "~/components/cabinet/cabinet-form.vue";
 export default {
   components: {
     RegistrationForm,
-    CabinetForm
-  }
+    CabinetForm,
+  },
 };
 </script>

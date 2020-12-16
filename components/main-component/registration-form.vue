@@ -22,15 +22,14 @@
                   <v-row>
                     <v-col cols="12">
                       <v-text-field
-                        v-model="loginEmail"
-                        :rules="loginEmailRules"
-                        label="E-mail"
+                        v-model="userName"
+                        label="UserName"
                         required
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12">
                       <v-text-field
-                        v-model="loginPassword"
+                        v-model="password"
                         :append-icon="show1?'eye':'eye-off'"
                         :rules="[rules.required, rules.min]"
                         :type="show1 ? 'text' : 'password'"
@@ -67,7 +66,7 @@
                         v-model="firstName"
                         :rules="[rules.required]"
                         label="First Name"
-                        maxlength="20"
+                        maxlength="50"
                         required
                       ></v-text-field>
                     </v-col>
@@ -76,12 +75,12 @@
                         v-model="lastName"
                         :rules="[rules.required]"
                         label="Last Name"
-                        maxlength="20"
+                        maxlength="50"
                         required
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12">
-                      <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
+                      <v-text-field v-model="username" label="UserName" required></v-text-field>
                     </v-col>
                     <v-col cols="12">
                       <v-text-field
@@ -145,24 +144,13 @@ export default {
 
       firstName: "",
       lastName: "",
-      email: "",
+      username: "",
       password: "",
       verify: "",
-      loginPassword: "",
-      loginEmail: "",
-      loginEmailRules: [
-        v => !!v || "Required",
-        v => /.+@.+\..+/.test(v) || "E-mail must be valid"
-      ],
-      emailRules: [
-        v => !!v || "Required",
-        v => /.+@.+\..+/.test(v) || "E-mail must be valid"
-      ],
-
       show1: false,
       rules: {
         required: value => !!value || "Required.",
-        min: v => (v && v.length >= 8) || "Min 8 characters"
+        min: v => (v && v.length >= 8) || "Min 6 characters"
       }
     };
   },
