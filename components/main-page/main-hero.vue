@@ -1,9 +1,15 @@
 <template>
   <div class="scene">
-    <div class="main_hero_title">
+    <!-- <div class="main_hero_title">
       <h1>Здесь установим заголовок и что нибудь напишем)))</h1>
-    </div>
-    <v-carousel cycle height="70vh" hide-delimiter-background show-arrows-on-hover>
+    </div>-->
+    <v-carousel
+      cycle
+      height="90vh"
+      :show-arrows="false"
+      hide-delimiter-background
+      show-arrows-on-hover
+    >
       <v-carousel-item v-for="(slide, i) in slides" :key="i">
         <v-sheet :color="colors[i]" height="100%">
           <v-row class="fill-height" align="center" justify="center">

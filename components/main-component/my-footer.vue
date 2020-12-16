@@ -52,7 +52,7 @@ export default {
         to: "/lessons"
       },
       {
-        icon: "mdi-hail",
+        icon: "mdi-office-building",
         title: "Inspire",
         to: "/cabinet"
       }
@@ -95,12 +95,12 @@ footer {
   bottom: 0;
   left: 0;
   width: 100%;
-  max-height: 100px;
+  max-height: 10vh;
   display: flex;
   flex-direction: column;
   transition: 0.3s;
   &.open {
-    max-height: 300px;
+    max-height: 20vh;
   }
 }
 .cont {

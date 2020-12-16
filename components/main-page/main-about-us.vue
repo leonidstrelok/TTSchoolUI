@@ -1,75 +1,77 @@
 <template>
   <div class="scene about_us">
     <div class="title">
-      <h1 class="padding-3">Почему мы?</h1>
+      <h1>Почему именно мы?</h1>
     </div>
     <div class="about_us_content">
-      <div class="about_us_block">
-        <div class="about_us_block_title">
-          <h2 class="finance-primary-color offering-title-link">Потому что</h2>
-          <div
-            style="margin:30px 0 0 0"
-            class=".body-1"
-          >Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias corrupti eaque quibusdam odio sit quos vero provident, nesciunt facere cumque quam, optio non sed possimus numquam quidem. Eaque, laudantium et?</div>
+      <div class="block" v-for="(item,index) in content" :key="index">
+        <div class="block_title">
+          <h2>{{item.title}}</h2>
         </div>
-      </div>
-      <div class="about_us_block">
-        <div class="about_us_block_title">
-          <h2 class="finance-primary-color offering-title-link">Потому что</h2>
-          <div
-            style="margin:30px 0 0 0"
-            class=".body-1"
-          >Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias corrupti eaque quibusdam odio sit quos vero provident, nesciunt facere cumque quam, optio non sed possimus numquam quidem. Eaque, laudantium et?</div>
-        </div>
-      </div>
-      <div class="about_us_block">
-        <div class="about_us_block_title">
-          <h2 class="finance-primary-color offering-title-link">Потому что</h2>
-          <div
-            style="margin:30px 0 0 0"
-            class=".body-1"
-          >Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias corrupti eaque quibusdam odio sit quos vero provident, nesciunt facere cumque quam, optio non sed possimus numquam quidem. Eaque, laudantium et?</div>
-        </div>
-      </div>
-      <div class="about_us_block">
-        <div class="about_us_block_title">
-          <h2 class="finance-primary-color offering-title-link">Потому что</h2>
-          <div
-            style="margin:30px 0 0 0"
-            class=".body-1"
-          >Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias corrupti eaque quibusdam odio sit quos vero provident, nesciunt facere cumque quam, optio non sed possimus numquam quidem. Eaque, laudantium et?</div>
-        </div>
+        <div class="block_description">{{item.description}}</div>
       </div>
     </div>
   </div>
 </template>
 
 
+<script>
+export default {
+  data() {
+    return {
+      content: [
+        {
+          title: "Опыт",
+          description:
+            "Благодоря опыту накопленному за долгое время мы имеем понимание и подход к каждому."
+        },
+        {
+          title: "Опыт",
+          description:
+            "Благодоря опыту накопленному за долгое время мы имеем понимание и подход к каждому."
+        },
+        {
+          title: "Опыт",
+          description:
+            "Благодоря опыту накопленному за долгое время мы имеем понимание и подход к каждому."
+        },
+        {
+          title: "Опыт",
+          description:
+            "Благодоря опыту накопленному за долгое время мы имеем понимание и подход к каждому."
+        }
+      ]
+    };
+  }
+};
+</script>
+
+
 <style lang="scss" scoped>
 .about_us {
-  margin: 100px 0 0 0;
+  padding: 100px 0 0 50px;
   position: relative;
   .title {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 0 50px 0;
+    text-align: center;
   }
+
   .about_us_content {
-    width: 100%;
-    min-height: 80vh;
+    min-height: 50vh;
+    margin: 50px;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    .about_us_block {
-      margin: 0 auto;
-      width: 60%;
-      height: 100%;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-row-gap: 30px;
+    grid-column-gap: 30px;
+  }
+  .block {
+    width: 60%;
+    margin: 0 auto;
+    .block_title {
+      text-align: center;
     }
-    .about_us_block_title {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+    .block_description {
+      text-align: center;
     }
   }
 }

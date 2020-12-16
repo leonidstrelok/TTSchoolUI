@@ -1,12 +1,15 @@
 <template>
-  <RegistrationForm />
+  <!-- <RegistrationForm /> -->
+  <CabinetForm />
 </template>
 
 <script>
-import RegistrationForm from "~/components/registration-form.vue";
+import RegistrationForm from "~/components/main-component/registration-form.vue";
+import CabinetForm from "~/components/cabinet/cabinet-form.vue";
 export default {
   components: {
-    RegistrationForm
+    RegistrationForm,
+    CabinetForm
   }
 };
 </script>

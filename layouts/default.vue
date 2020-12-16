@@ -1,11 +1,13 @@
 <template>
   <v-app light>
     <!-- <my-header /> -->
-    <v-main>
-      <v-container>
-        <nuxt />
-      </v-container>
-    </v-main>
+    <!-- <v-main>
+    <v-container>-->
+    <div class="content">
+      <nuxt />
+    </div>
+    <!-- </v-container>
+    </v-main>-->
     <my-footer />
   </v-app>
 </template>
@@ -33,7 +35,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.v-main {
+.content {
   padding: 0 0 100px 0 !important;
 }
 </style>

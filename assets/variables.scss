@@ -3,5 +3,12 @@
 // The variables you want to modify
 // $font-size-root: 20px;
 .scene {
+    position: relative;
     min-height: 90vh;
+    min-width: 100%;
+    overflow: hidden;
+}
+
+* {
+    box-sizing: border-box;
 }
