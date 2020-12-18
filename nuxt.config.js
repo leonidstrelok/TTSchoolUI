@@ -1,14 +1,4 @@
-import colors from 'vuetify/es5/util/colors';
-import path from "path";
-import fs from "fs";
-const config = JSON.parse(
-  fs.readFileSync(path.resolve(__dirname, "config/urlConfig.json"))
-);
 export default {
-  env: {
-    serverUrl: config.serverUrl,
-    localUrl: config.localUrl,
-  },
   ssr: false,
 
   target: 'static',
@@ -51,8 +41,5 @@ export default {
   },
 
   build: {
-  },
-  router: {
-    // middleware: ['oidc-router', 'oidc-callback']
   }
 }
