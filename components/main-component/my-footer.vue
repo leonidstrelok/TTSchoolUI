@@ -14,7 +14,7 @@
         </v-btn>
       </div>
       <div class="policy">
-        <a class="link">Terms of Service Agreement</a>
+        <!-- <a class="link">Terms of Service Agreement</a> -->
         <a class="link">
           <PrivacyPolicy />
         </a>
@@ -101,29 +101,43 @@ footer {
   transition: 0.3s;
   &.open {
     max-height: 20vh;
+    @include minmax(0px, 1024px) {
+      max-height: 40vh;
+    }
   }
-}
-.cont {
-  padding: 20px;
-  border-right: 5px solid #f0f0f0;
-  border-left: 5px solid #f0f0f0;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  align-items: center;
-  .link {
-    margin: 0 10px;
-  }
-  .copyright {
-    display: flex;
-    justify-content: flex-end;
-  }
-  .contacts {
-    display: flex;
-    // justify-content: center;
-  }
-  .policy {
-    display: flex;
-    justify-content: center;
+  .cont {
+    padding: 20px;
+    border-right: 5px solid #f0f0f0;
+    border-left: 5px solid #f0f0f0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    @include minmax(0px, 1024px) {
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr 1fr 1fr;
+    }
+    align-items: center;
+    .link {
+      margin: 0 10px;
+    }
+    .copyright {
+      display: flex;
+      justify-content: flex-end;
+      @include minmax(0px, 1024px) {
+        justify-content: center;
+        padding: 0 10px;
+      }
+    }
+    .contacts {
+      display: flex;
+      @include minmax(0px, 1024px) {
+        grid-row: 2/3;
+        justify-content: space-around;
+      }
+    }
+    .policy {
+      display: flex;
+      justify-content: center;
+    }
   }
 }
 </style>

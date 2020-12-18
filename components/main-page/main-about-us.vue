@@ -51,6 +51,9 @@ export default {
 .about_us {
   padding: 100px 0 0 50px;
   position: relative;
+  @include minmax(0px, 1024px) {
+    padding: 50px 0 50px 0;
+  }
   .title {
     text-align: center;
   }
@@ -63,10 +66,17 @@ export default {
     grid-template-rows: repeat(2, 1fr);
     grid-row-gap: 30px;
     grid-column-gap: 30px;
+    @include minmax(0px, 1024px) {
+      grid-template-columns: 1fr;
+      margin: 50px 0 0 0;
+    }
   }
   .block {
     width: 60%;
     margin: 0 auto;
+    @include minmax(0px, 1024px) {
+      padding: 10px;
+    }
     .block_title {
       text-align: center;
     }
