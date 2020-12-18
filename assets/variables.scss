@@ -2,6 +2,26 @@
 //
 // The variables you want to modify
 // $font-size-root: 20px;
+
+@mixin max($media) {
+    @media only screen and (max-width: $media) {
+        -webkit-min-device-pixel-ratio: 2;
+        @content;
+    }
+}
+@mixin min($media) {
+    @media only screen and (min-width: $media) {
+        -webkit-min-device-pixel-ratio: 2;
+        @content;
+    }
+}
+@mixin minmax($min, $max) {
+    @media only screen and (min-width: $min) and (max-width: $max) {
+        -webkit-min-device-pixel-ratio: 2;
+        @content;
+    }
+}
+
 .scene {
     position: relative;
     min-height: 90vh;

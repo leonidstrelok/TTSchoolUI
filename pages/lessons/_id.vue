@@ -5,7 +5,6 @@
       <v-date-picker
         :min="now"
         first-day-of-week="1"
-        locale="ru"
         v-model="date"
         color="green lighten-1"
         full-width
@@ -28,13 +27,13 @@
         <v-chip
           :class="{'teal accent-3':!isEndTime}"
           @click="setStartTime"
-        >Начало:{{startTime | formatDate}}</v-chip>
+        >Start:{{startTime | formatDate}}</v-chip>
         <v-chip
           :class="{'teal accent-3':isEndTime}"
           @click="setEndTime"
-        >Конец:{{endTime | formatDate}}</v-chip>
+        >End:{{endTime | formatDate}}</v-chip>
       </v-chip-group>
-      <v-btn block>Занять</v-btn>
+      <ReserveBtn :date="date" :startTime="startTime" :endTime="endTime" :ready="ready" />
     </div>
   </div>
 </template>
@@ -42,13 +41,18 @@
 
 <script>
 import moment from "moment";
-
+import ReserveBtn from "~/components/lessons/reserve-btn.vue";
 export default {
+  components: {
+    ReserveBtn
+  },
   data() {
     return {
       startTime: new Date(0, 0, 0, 0, 0, 0, 0),
       endTime: new Date(0, 0, 0, 0, 0, 0, 0),
       isEndTime: false,
+      startTimeSelected: false,
+      endTimeSelected: false,
       date: new Date().toISOString().substr(0, 10),
       lessonTime: [
         {
@@ -98,6 +102,12 @@ export default {
     now() {
       let today = new Date();
       return today.toISOString().substring(0, 10);
+    },
+    ready() {
+      if (this.startTimeSelected && this.endTimeSelected) {
+        return false;
+      }
+      return true;
     }
   },
   filters: {
@@ -119,6 +129,7 @@ export default {
     setTime(time) {
       if (!this.isEndTime) {
         this.startTime = time;
+        this.startTimeSelected = true;
         this.lessonTime.forEach(element => {
           if (element.value < time) {
             element.disabled = true;
@@ -126,6 +137,7 @@ export default {
         });
       } else {
         this.endTime = time;
+        this.endTimeSelected = true;
         this.lessonTime.forEach(element => {
           if (element.value > time) {
             element.disabled = true;
@@ -140,6 +152,7 @@ export default {
           element.disabled = false;
         }
       });
+      this.startTimeSelected = false;
       this.startTime = new Date(0, 0, 0, 0, 0, 0, 0);
     },
     setEndTime() {
@@ -151,6 +164,7 @@ export default {
           }
         });
       }
+      this.endTimeSelected = false;
       this.endTime = new Date(0, 0, 0, 0, 0, 0, 0);
       this.isEndTime = true;
     }

@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="scene">
     <v-row>
-      <v-col v-for="lesson in lessons" :key="lesson.id" cols="12" sm="6" xs="12" lg="4" xl="3">
+      <v-col v-for="lesson in lessons" :key="lesson.id" cols="12" sm="12" xs="6" lg="4" xl="3">
         <LessonCard :lesson="lesson" />
       </v-col>
     </v-row>
@@ -16,40 +16,31 @@ export default {
     return {
       lessons: [
         {
-          id: 1,
-          name: "Уроки вождения",
-          description: "Описание уроков вождения"
+          id: 2,
+          name: "Prep CDL Test",
+          description:
+            "If you plan on operating a Commercial Motor Vehicle (CMV) then you are required to obtain a Commercial Driver License (CDL). In order to get a CDL, you must first take and pass a general knowledge test, various endorsement tests (depending on the license type you are seeking) and a driving skills test.  "
         },
         {
-          id: 2,
-          name: "Уроки английского языка",
-          description: "Описание уроков английского языка"
+          id: 4,
+          name: "Pre-Trip Inspection",
+          description:
+            "The Pre-Trip Inspection is a thorough inspection of the vehicle and all of its major systems. Inspecting the vehicle before driving each day is a Federal requirement and normally takes about 15 minutes."
+        },
+        {
+          id: 3,
+          name: "Accounting",
+          description:
+            "Accounting or accountancy is the measurement, processing, and communication of financial and non financial information about economic entities such as businesses and corporations."
+        },
+        {
+          id: 1,
+          name: "Dispatching",
+          description:
+            "Are you interested in learning about Dispatch, Logistics and Trucking industry?"
         }
       ]
     };
   }
 };
 </script>
-
-
-
-<style lang="scss">
-.v-card--reveal {
-  align-items: center;
-  bottom: 0;
-  justify-content: center;
-  opacity: 0.5;
-  position: absolute;
-  font-size: 16px;
-  z-index: 100;
-  width: 100%;
-  cursor: pointer;
-}
-.lesson {
-  position: relative;
-  z-index: 1;
-}
-.subtitle-1 {
-  padding: 10px;
-}
-</style>

@@ -40,6 +40,9 @@ export default {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   align-items: center;
+  @include minmax(0px, 1024px) {
+    grid-template-columns: 1fr;
+  }
   .link {
     margin: 0 10px;
   }
