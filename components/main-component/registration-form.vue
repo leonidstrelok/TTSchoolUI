@@ -11,7 +11,7 @@
           grow
         >
           <v-tabs-slider color="purple darken-4"></v-tabs-slider>
-          <v-tab v-for="(i,index) in tabs" :key="index">
+          <v-tab v-for="(i, index) in tabs" :key="index">
             <v-icon large>{{ i.icon }}</v-icon>
             <div class="caption py-1">{{ i.name }}</div>
           </v-tab>
@@ -21,12 +21,20 @@
                 <v-form ref="loginForm" v-model="valid" lazy-validation>
                   <v-row>
                     <v-col cols="12">
+<<<<<<< HEAD
                       <v-text-field v-model="userName" label="UserName" required></v-text-field>
+=======
+                      <v-text-field
+                        v-model="username"
+                        label="UserName"
+                        required
+                      ></v-text-field>
+>>>>>>> de30000b669386fc9adf7d5bb582fa49315beac6
                     </v-col>
                     <v-col cols="12">
                       <v-text-field
                         v-model="password"
-                        :append-icon="show1?'eye':'eye-off'"
+                        :append-icon="show1 ? 'eye' : 'eye-off'"
                         :rules="[rules.required, rules.min]"
                         :type="show1 ? 'text' : 'password'"
                         name="input-10-1"
@@ -45,7 +53,8 @@
                         :disabled="!valid"
                         color="success"
                         @click="validate"
-                      >Login</v-btn>
+                        >Login</v-btn
+                      >
                     </v-col>
                   </v-row>
                 </v-form>
@@ -76,7 +85,11 @@
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12">
-                      <v-text-field v-model="username" label="UserName" required></v-text-field>
+                      <v-text-field
+                        v-model="username"
+                        label="UserName"
+                        required
+                      ></v-text-field>
                     </v-col>
                     <v-col cols="12">
                       <v-text-field
@@ -111,8 +124,9 @@
                         block
                         :disabled="!valid"
                         color="success"
-                        @click="validate"
-                      >Register</v-btn>
+                        @click="registerValidate"
+                        >Register</v-btn
+                      >
                     </v-col>
                   </v-row>
                 </v-form>
@@ -127,6 +141,7 @@
 
 
 <script>
+import { mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -134,7 +149,7 @@ export default {
       tab: 0,
       tabs: [
         { name: "Login", icon: "mdi-account" },
-        { name: "Register", icon: "mdi-account-outline" }
+        { name: "Register", icon: "mdi-account-outline" },
       ],
       valid: true,
 
@@ -145,28 +160,49 @@ export default {
       verify: "",
       show1: false,
       rules: {
-        required: value => !!value || "Required.",
-        min: v => (v && v.length >= 8) || "Min 6 characters"
-      }
+        required: (value) => !!value || "Required.",
+        min: (v) => (v && v.length >= 8) || "Min 6 characters",
+      },
     };
   },
   computed: {
     passwordMatch() {
       return () => this.password === this.verify || "Password must match";
-    }
+    },
   },
   methods: {
-    validate() {
+    ...mapActions({
+      getToken: "auth/post_access_token",
+      registration: "auth/post_registration",
+    }),
+    async validate() {
       if (this.$refs.loginForm.validate()) {
+        const params = new URLSearchParams();
+        params.append("client_id", "TTSchool.API");
+        params.append("grant_type", "password");
+        params.append("username", this.username);
+        params.append("password", this.password);
+        const token = await this.getToken(params);
+        localStorage.setItem("user", token)
       }
+    },
+    async registerValidate() {
+      var reg = {
+        firstName: this.firstName,
+        lastName: this.lastName,
+        username: this.username,
+        password: this.password,
+        confirmPassword: this.verify,
+      }
+      await this.registration(reg);
     },
     reset() {
       this.$refs.form.reset();
     },
     resetValidation() {
       this.$refs.form.resetValidation();
-    }
-  }
+    },
+  },
 };
 </script>
 
