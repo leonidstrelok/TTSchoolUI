@@ -4,7 +4,7 @@
       <v-progress-linear color="deep-purple" height="10" indeterminate></v-progress-linear>
     </template>
 
-    <v-img height="250" src="https://cdn.vuetifyjs.com/images/cards/cooking.png"></v-img>
+    <v-img contain max-height="250" :src="`img/${lesson.img}`"></v-img>
 
     <v-card-title>{{lesson.name}}</v-card-title>
 
@@ -16,7 +16,7 @@
 
     <v-divider class="mx-4"></v-divider>
     <v-card-actions>
-      <v-btn color="deep-purple lighten-2" text :to="'lessons/'+lesson.id">Перейти</v-btn>
+      <v-btn color="deep-purple lighten-2" text :to="'lessons/'+ lesson.id">Reserve</v-btn>
     </v-card-actions>
   </v-card>
 </template>

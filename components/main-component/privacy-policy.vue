@@ -7,7 +7,13 @@
       <v-card>
         <v-card-title class="headline grey lighten-2">Site Policy</v-card-title>
 
-        <v-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</v-card-text>
+        <v-card-text>
+          <h1 class="mt-3">You can rest assured our site</h1>
+          <h2 class="mt-3">-Doesn't use cookies</h2>
+          <h2 class="mt-3">-Safely stores your credentials</h2>
+          <h2 class="mt-3">-All information about users is confidential</h2>
+          <h1 class="mt-3">We are glad that you trust us. Have a nice day!</h1>
+        </v-card-text>
         <v-divider></v-divider>
         <v-card-actions>
           <v-spacer></v-spacer>

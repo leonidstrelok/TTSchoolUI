@@ -11,11 +11,9 @@
       show-arrows-on-hover
     >
       <v-carousel-item v-for="(slide, i) in slides" :key="i">
-        <v-sheet :color="colors[i]" height="100%">
-          <v-row class="fill-height" align="center" justify="center">
-            <div class="display-3">{{ slide }} Slide</div>
-          </v-row>
-        </v-sheet>
+        <div :style="'backgroundColor:'+slide.bgcolor" class="img_wrapper">
+          <v-img position="center" contain :src="slide.img" max-width="100%" max-height="100%"></v-img>
+        </div>
       </v-carousel-item>
     </v-carousel>
   </div>
@@ -24,20 +22,32 @@
 export default {
   data() {
     return {
-      colors: [
-        "indigo",
-        "warning",
-        "pink darken-2",
-        "red lighten-1",
-        "deep-purple accent-4"
-      ],
-      slides: ["First", "Second", "Third", "Fourth", "Fifth"]
+      slides: [
+        {
+          img: "img/slide1.jpg",
+          bgcolor: "#c9c9c9"
+        },
+        {
+          img: "img/slide2.jpg",
+          bgcolor: "#2a0240"
+        },
+        {
+          img: "img/slide3.jpg",
+          bgcolor: "#9bdcbe"
+        }
+      ]
     };
   }
 };
 </script>
 
 <style lang="scss">
+.img_wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
 .main_hero_title {
   margin: 50px 0;
 }

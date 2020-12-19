@@ -4,8 +4,7 @@ export default {
   target: 'static',
 
   head: {
-    titleTemplate: '%s - TurnOfStudy',
-    title: 'TurnOfStudy',
+    title: 'Merv Learning Center',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },

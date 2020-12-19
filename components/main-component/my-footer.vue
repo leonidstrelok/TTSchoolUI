@@ -19,7 +19,7 @@
           <PrivacyPolicy />
         </a>
       </div>
-      <div class="copyright">Copyright © QOMPLX, Inc. 2020 All rights reserved</div>
+      <div class="copyright">Copyright © MLC, 2020</div>
     </div>
   </footer>
 </template>

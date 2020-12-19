@@ -1,14 +1,16 @@
 <template>
   <div class="scene about_us">
     <div class="title">
-      <h1>Почему именно мы?</h1>
+      <h1>Why Choose MLC?</h1>
     </div>
     <div class="about_us_content">
       <div class="block" v-for="(item,index) in content" :key="index">
         <div class="block_title">
           <h2>{{item.title}}</h2>
         </div>
-        <div class="block_description">{{item.description}}</div>
+        <div class="block_description">
+          <h3>{{item.description}}</h3>
+        </div>
       </div>
     </div>
   </div>
@@ -21,24 +23,23 @@ export default {
     return {
       content: [
         {
-          title: "Опыт",
+          title: "Trained Masters",
           description:
-            "Благодоря опыту накопленному за долгое время мы имеем понимание и подход к каждому."
+            "The best masters of their craft who know exactly what they are doing."
         },
         {
-          title: "Опыт",
+          title: "Years of experience",
           description:
-            "Благодоря опыту накопленному за долгое время мы имеем понимание и подход к каждому."
+            "Thanks to the experience gained over a long time, we have an understanding and approach to everyone."
         },
         {
-          title: "Опыт",
+          title: "Responsibility",
           description:
-            "Благодоря опыту накопленному за долгое время мы имеем понимание и подход к каждому."
+            "We work individually with each client choosing the best conditions."
         },
         {
-          title: "Опыт",
-          description:
-            "Благодоря опыту накопленному за долгое время мы имеем понимание и подход к каждому."
+          title: "Good attitude",
+          description: "We are always glad to each of you."
         }
       ]
     };

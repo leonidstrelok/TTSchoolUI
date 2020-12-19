@@ -1,6 +1,6 @@
 <template>
   <div class="lesson_id_wrapper">
-    <v-card-title>Название урока</v-card-title>
+    <v-card-title>{{ setTitle() }}</v-card-title>
     <div class="calendar">
       <v-date-picker
         :min="now"
@@ -95,6 +95,24 @@ export default {
           value: new Date(0, 0, 0, 17, 0, 0, 0),
           disabled: false
         }
+      ],
+      lessons: [
+        {
+          id: "prep-cdl-test",
+          name: "Prep CDL Test"
+        },
+        {
+          id: "pre-trip-inspection",
+          name: "Pre-Trip Inspection"
+        },
+        {
+          id: "accounting",
+          name: "Accounting"
+        },
+        {
+          id: "dispatching",
+          name: "Dispatching"
+        }
       ]
     };
   },
@@ -126,6 +144,13 @@ export default {
   //   }
   // },
   methods: {
+    setTitle() {
+      this.lessons.forEach(element => {
+        if (element.id === this.$route.params.id) {
+          return element.name;
+        }
+      });
+    },
     setTime(time) {
       if (!this.isEndTime) {
         this.startTime = time;
@@ -170,7 +195,7 @@ export default {
     }
   },
   created() {
-    console.log(this.$route.params);
+    // console.log(this.$route.params);
   }
 };
 </script>
