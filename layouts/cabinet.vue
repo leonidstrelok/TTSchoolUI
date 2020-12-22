@@ -11,6 +11,9 @@
 <script>
 import CabinetNavigation from "~/components/cabinet/navigation-drawer.vue";
 import MyFooter from "~/components/main-component/my-footer.vue";
+import dataApi from "@/infrastructure/data-api.js";
+import { mapMutations } from "vuex";
+
 export default {
   components: {
     CabinetNavigation,
@@ -26,6 +29,21 @@ export default {
       rightDrawer: false,
       title: "Vuetify.js"
     };
+  },
+  methods: {
+    ...mapMutations({
+      setUser: "user/SET_USER"
+    })
+  },
+  async created() {
+    try {
+      let { data } = await this.$axios.get(dataApi.auth.check);
+      this.setUser(data);
+      this.$router.push(`/cabinet/lessons/${data.userIdentifier}`);
+    } catch (error) {
+      this.notAuthorize = true;
+      console.error(error);
+    }
   }
 };
 </script>

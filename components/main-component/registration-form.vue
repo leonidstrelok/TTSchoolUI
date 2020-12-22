@@ -116,6 +116,8 @@
 
 <script>
 import { mapActions } from "vuex";
+import dataApi from "@/infrastructure/data-api.js";
+
 export default {
   data() {
     return {
@@ -167,6 +169,12 @@ export default {
         params.append("password", this.password);
         const token = await this.getToken(params);
         localStorage.setItem("user", token);
+        try {
+          let { data } = await this.$axios.get(dataApi.auth.check);
+          this.$router.push(`/cabinet/lessons/${data.userIdentifier}`);
+        } catch (error) {
+          return false;
+        }
       }
     },
     async registrate() {
@@ -179,7 +187,12 @@ export default {
           password: this.password,
           confirmPassword: this.verify
         };
-        await this.registration(reg);
+        try {
+          await this.registration(reg);
+          this.login();
+        } catch (error) {
+          return false;
+        }
       }
     }
   }
