@@ -21,15 +21,7 @@
                 <v-form ref="loginForm" v-model="valid" lazy-validation>
                   <v-row>
                     <v-col cols="12">
-<<<<<<< HEAD
-                      <v-text-field v-model="userName" label="UserName" required></v-text-field>
-=======
-                      <v-text-field
-                        v-model="username"
-                        label="UserName"
-                        required
-                      ></v-text-field>
->>>>>>> de30000b669386fc9adf7d5bb582fa49315beac6
+                      <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
                     </v-col>
                     <v-col cols="12">
                       <v-text-field
@@ -47,14 +39,7 @@
                     <v-col class="d-flex" cols="12" sm="6" xsm="12"></v-col>
                     <v-spacer></v-spacer>
                     <v-col class="d-flex" cols="12" sm="3" xsm="12" align-end>
-                      <v-btn
-                        x-large
-                        block
-                        :disabled="!valid"
-                        color="success"
-                        @click="validate"
-                        >Login</v-btn
-                      >
+                      <v-btn x-large block color="success" @click="login">Login</v-btn>
                     </v-col>
                   </v-row>
                 </v-form>
@@ -64,7 +49,7 @@
           <v-tab-item>
             <v-card class="px-4">
               <v-card-text>
-                <v-form ref="registerForm" v-model="valid" lazy-validation>
+                <v-form ref="registrationForm" v-model="valid" lazy-validation>
                   <v-row>
                     <v-col cols="12" sm="6" md="6">
                       <v-text-field
@@ -85,11 +70,7 @@
                       ></v-text-field>
                     </v-col>
                     <v-col cols="12">
-                      <v-text-field
-                        v-model="username"
-                        label="UserName"
-                        required
-                      ></v-text-field>
+                      <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
                     </v-col>
                     <v-col cols="12">
                       <v-text-field
@@ -119,14 +100,7 @@
                     </v-col>
                     <v-spacer></v-spacer>
                     <v-col class="d-flex ml-auto" cols="12" sm="3" xsm="12">
-                      <v-btn
-                        x-large
-                        block
-                        :disabled="!valid"
-                        color="success"
-                        @click="registerValidate"
-                        >Register</v-btn
-                      >
+                      <v-btn x-large block color="success" @click="registrate">Register</v-btn>
                     </v-col>
                   </v-row>
                 </v-form>
@@ -145,64 +119,70 @@ import { mapActions } from "vuex";
 export default {
   data() {
     return {
-      dialog: true,
       tab: 0,
-      tabs: [
-        { name: "Login", icon: "mdi-account" },
-        { name: "Register", icon: "mdi-account-outline" },
-      ],
       valid: true,
-
       firstName: "",
       lastName: "",
-      username: "",
+      email: "",
       password: "",
       verify: "",
-      show1: false,
-      rules: {
-        required: (value) => !!value || "Required.",
-        min: (v) => (v && v.length >= 8) || "Min 6 characters",
-      },
+      show1: false
     };
   },
   computed: {
+    tabs() {
+      return [
+        { name: "Login", icon: "mdi-account" },
+        { name: "Register", icon: "mdi-account-outline" }
+      ];
+    },
     passwordMatch() {
       return () => this.password === this.verify || "Password must match";
     },
+    rules() {
+      return {
+        required: value => !!value || "Required.",
+        min: value => (value && value.length >= 8) || "Min 8 characters"
+      };
+    },
+    emailRules() {
+      return [
+        value => !!value || "E-mail is required",
+        value => /.+@.+\..+/.test(value) || "E-mail must be valid"
+      ];
+    }
   },
   methods: {
     ...mapActions({
       getToken: "auth/post_access_token",
-      registration: "auth/post_registration",
+      registration: "auth/post_registration"
     }),
-    async validate() {
-      if (this.$refs.loginForm.validate()) {
+    async login() {
+      let result = this.$refs.loginForm.validate();
+      if (result) {
         const params = new URLSearchParams();
         params.append("client_id", "TTSchool.API");
         params.append("grant_type", "password");
-        params.append("username", this.username);
+        params.append("username", this.email);
         params.append("password", this.password);
         const token = await this.getToken(params);
-        localStorage.setItem("user", token)
+        localStorage.setItem("user", token);
       }
     },
-    async registerValidate() {
-      var reg = {
-        firstName: this.firstName,
-        lastName: this.lastName,
-        username: this.username,
-        password: this.password,
-        confirmPassword: this.verify,
+    async registrate() {
+      let result = this.$refs.registrationForm.validate();
+      if (result) {
+        let reg = {
+          firstName: this.firstName,
+          lastName: this.lastName,
+          email: this.email,
+          password: this.password,
+          confirmPassword: this.verify
+        };
+        await this.registration(reg);
       }
-      await this.registration(reg);
-    },
-    reset() {
-      this.$refs.form.reset();
-    },
-    resetValidation() {
-      this.$refs.form.resetValidation();
-    },
-  },
+    }
+  }
 };
 </script>
 

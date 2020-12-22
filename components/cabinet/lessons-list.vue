@@ -1,9 +1,5 @@
 <template>
   <div>
-    <v-toolbar dense>
-      <v-toolbar-title>Ваши занятия : Леонид Леонидов</v-toolbar-title>
-      <v-spacer></v-spacer>
-    </v-toolbar>
     <div class="cabinet_content">
       <LessonListItme />
     </div>

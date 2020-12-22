@@ -1,4 +1,7 @@
 export default {
+  env: {
+    serverUrl: "https://192.168.1.105:1234",
+  },
   ssr: false,
 
   target: 'static',

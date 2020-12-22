@@ -1,5 +1,5 @@
 <template>
-  <div class="scene advantages">
+  <div class="advantages">
     <div class="photo_paralax">
       <div class="block">
         <v-parallax src="img/hero.png">
@@ -17,7 +17,7 @@
 .photo_paralax {
   .v-parallax {
     text-align: center;
-    min-height: 90vh !important;
+    // min-height: 90vh !important;
   }
   .v-parallax__content {
     padding: 20px;
