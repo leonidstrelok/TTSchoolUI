@@ -63,12 +63,12 @@ export default {
     }
   },
   mounted() {
-    try {
-      let { data } = this.$axios.get(dataApi.lessons.getByIdLesson);
-      this.items = data;
-    } catch (error) {
-      console.error(error);
-    }
+    // try {
+    //   let { data } = this.$axios.get(dataApi.lessons.getByIdLesson);
+    //   this.items = data;
+    // } catch (error) {
+    //   console.error(error);
+    // }
   }
 };
 </script>

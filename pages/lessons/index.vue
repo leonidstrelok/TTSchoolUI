@@ -16,14 +16,14 @@ export default {
     return {
       lessons: [
         {
-          id: "prep-cdl-test",
+          id: "prepCdlTest",
           name: "Prep CDL Test",
           img: "cdl.jpg",
           description:
             "If you plan on operating a Commercial Motor Vehicle (CMV) then you are required to obtain a Commercial Driver License (CDL). In order to get a CDL, you must first take and pass a general knowledge test, various endorsement tests (depending on the license type you are seeking) and a driving skills test.  "
         },
         {
-          id: "pre-trip-inspection",
+          id: "preTripInspection",
           name: "Pre-Trip Inspection",
           img: "pre-trip-inspection.jpg",
           description:

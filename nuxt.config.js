@@ -1,6 +1,6 @@
 export default {
   env: {
-    serverUrl: "https://192.168.4.150:4443",
+    serverUrl: "https://192.168.1.111:1234",
   },
   ssr: false,
 

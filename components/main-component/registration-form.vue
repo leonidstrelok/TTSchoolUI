@@ -107,6 +107,23 @@
               </v-card-text>
             </v-card>
           </v-tab-item>
+          <v-tab-item>
+            <v-card class="px-4">
+              <v-card-text>
+                <v-form ref="forgotPassword" v-model="valid" lazy-validation>
+                  <v-row>
+                    <v-col cols="12">
+                      <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
+                    </v-col>
+                    <v-spacer></v-spacer>
+                    <v-col class="d-flex ml-auto" cols="12" sm="3" xsm="12">
+                      <v-btn x-large block color="success" @click="forgotPassword">Send</v-btn>
+                    </v-col>
+                  </v-row>
+                </v-form>
+              </v-card-text>
+            </v-card>
+          </v-tab-item>
         </v-tabs>
       </div>
     </div>
@@ -135,7 +152,8 @@ export default {
     tabs() {
       return [
         { name: "Login", icon: "mdi-account" },
-        { name: "Register", icon: "mdi-account-outline" }
+        { name: "Register", icon: "mdi-account-outline" },
+        { name: "Forgot", icon: "mdi-shield-account-outline" }
       ];
     },
     passwordMatch() {
@@ -157,7 +175,8 @@ export default {
   methods: {
     ...mapActions({
       getToken: "auth/post_access_token",
-      registration: "auth/post_registration"
+      registration: "auth/post_registration",
+      sendPassword: "auth/forgot_password"
     }),
     async login() {
       let result = this.$refs.loginForm.validate();
@@ -194,6 +213,17 @@ export default {
           return false;
         }
       }
+    },
+    async forgotPassword() {
+      let result = this.$refs.forgotPassword.validate();
+      if (result) {
+        try {
+          console.log(12);
+          await this.sendPassword(this.email);
+        } catch (error) {
+          return false;
+        }
+      }
     }
   }
 };
@@ -203,7 +233,7 @@ export default {
 <style lang="scss">
 .registration_form {
   max-width: 600px;
-  min-width: 360px;
+  min-width: 300px;
   margin: 5% auto 0 auto;
   -webkit-box-shadow: 5px 5px 24px 0px rgba(50, 50, 50, 0.68);
   -moz-box-shadow: 5px 5px 24px 0px rgba(50, 50, 50, 0.68);

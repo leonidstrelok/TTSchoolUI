@@ -49,7 +49,8 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapGetters, mapActions } from "vuex";
+// getUser
 export default {
   data() {
     return {
@@ -61,6 +62,9 @@ export default {
     };
   },
   computed: {
+    ...mapGetters({
+      user: "user/getUser"
+    }),
     passwordMatch() {
       return () => this.newPassword === this.verify || "Password must match";
     },
@@ -73,7 +77,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      changePassword: "auth/cahnge_password"
+      changePassword: "auth/change_password"
     }),
     async registrate() {
       let result = this.$refs.registrationForm.validate();
@@ -83,7 +87,10 @@ export default {
           newPassword: this.newPassword,
           verify: this.verify
         };
-        await this.changePassword(reg);
+        await this.changePassword({
+          email: this.user.preferred_username,
+          payload: reg
+        });
       }
     }
   }

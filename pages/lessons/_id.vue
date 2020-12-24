@@ -1,6 +1,6 @@
 <template>
   <div class="lesson_id_wrapper">
-    <v-card-title>{{ setTitle() }}</v-card-title>
+    <v-card-title>{{ title }}</v-card-title>
     <div class="calendar">
       <v-date-picker
         :min="now"
@@ -33,7 +33,13 @@
           @click="setEndTime"
         >End:{{endTime | formatDate}}</v-chip>
       </v-chip-group>
-      <ReserveBtn :date="date" :startTime="startTime" :endTime="endTime" :ready="ready" />
+      <ReserveBtn
+        :id="lessonId"
+        :date="date"
+        :startTime="startTime"
+        :endTime="endTime"
+        :ready="ready"
+      />
     </div>
   </div>
 </template>
@@ -49,6 +55,7 @@ export default {
   },
   data() {
     return {
+      title: "12",
       startTime: new Date(0, 0, 0, 0, 0, 0, 0),
       endTime: new Date(0, 0, 0, 0, 0, 0, 0),
       isEndTime: false,
@@ -99,11 +106,11 @@ export default {
       ],
       lessons: [
         {
-          id: "prep-cdl-test",
+          id: "prepCdlTest",
           name: "Prep CDL Test"
         },
         {
-          id: "pre-trip-inspection",
+          id: "preTripInspection",
           name: "Pre-Trip Inspection"
         },
         {
@@ -114,10 +121,38 @@ export default {
           id: "dispatching",
           name: "Dispatching"
         }
-      ]
+      ],
+      lessonsConst: {
+        dispatching: "dispatching",
+        dispatchingId: 1,
+        prepCdlTest: "prepCdlTest",
+        prepCdlTestId: 2,
+        accouting: "accounting",
+        accoutingId: 3,
+        preTripInspection: "preTripInspection",
+        preTripInspectionId: 4
+      }
     };
   },
   computed: {
+    lessonId() {
+      switch (this.$route.params.id) {
+        case this.lessonsConst.dispatching:
+          return this.lessonsConst.dispatchingId;
+          break;
+        case this.lessonsConst.prepCdlTest:
+          return this.lessonsConst.prepCdlTestId;
+          break;
+        case this.lessonsConst.accouting:
+          return this.lessonsConst.accoutingId;
+          break;
+        case this.lessonsConst.preTripInspection:
+          return this.lessonsConst.preTripInspectionId;
+          break;
+        default:
+          break;
+      }
+    },
     now() {
       let today = new Date();
       return today.toISOString().substring(0, 10);
@@ -136,13 +171,6 @@ export default {
     }
   },
   methods: {
-    setTitle() {
-      this.lessons.forEach(element => {
-        if (element.id === this.$route.params.id) {
-          return element.name;
-        }
-      });
-    },
     setTime(time) {
       if (!this.isEndTime) {
         this.startTime = time;
@@ -188,14 +216,23 @@ export default {
   },
   async mounted() {
     try {
-      let { data } = await this.$axios.get(dataApi.lessons.getByIdLesson);
-      // this.$router.push("/cabinet/lesson/")
+      let { data } = await this.$axios.get(
+        dataApi.lessons.getByIdLesson + this.date + "/" + this.lessonId
+      );
+
+      this.lessonTime.forEach(element => {
+        console.log(moment(element.value).format("LT"));
+      });
     } catch (error) {
       console.error(error);
     }
   },
   created() {
-    // console.log(this.$route.params);
+    this.lessons.forEach(element => {
+      if (element.id === this.$route.params.id) {
+        this.title = element.name;
+      }
+    });
   }
 };
 </script>

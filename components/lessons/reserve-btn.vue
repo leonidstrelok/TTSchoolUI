@@ -37,12 +37,15 @@
 <script>
 import moment from "moment";
 import dataApi from "@/infrastructure/data-api.js";
+import { mapGetters } from "vuex";
+
 export default {
   props: {
     ready: {
       type: Boolean,
       default: false
     },
+    id: {},
     startTime: {},
     endTime: {},
     date: {}
@@ -53,6 +56,11 @@ export default {
       snackbar: false,
       snackbarError: false
     };
+  },
+  computed: {
+    ...mapGetters({
+      user: "user/getUser"
+    })
   },
   filters: {
     formatDate(value) {
@@ -67,7 +75,17 @@ export default {
   methods: {
     async registrateTime() {
       try {
-        await this.$axios.get(dataApi.lessons.registrateTime);
+        let time = {
+          id: this.id,
+          dateEmploymentLessonDTO: {
+            startDateLesson: this.date,
+            endTimeLesson: moment(this.endTime).format("LT"),
+            startTimeLesson: moment(this.startTime).format("LT")
+          }
+        };
+        console.log(this.user);
+        await this.$axios.post(dataApi.lessons.registrateTime, time);
+        this.$router.push("/cabinet/lessons/" + this.user.userIdentifier);
         this.dialog = false;
         this.snackbar = true;
       } catch (error) {

@@ -16,7 +16,7 @@
 
       <v-divider></v-divider>
       <v-list dense nav>
-        <v-list-item :to="item.to" v-for="item in items" :key="item.title" link>
+        <v-list-item @click="goTo(item.to)" v-for="item in items" :key="item.title" link>
           <v-list-item-icon>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-icon>
@@ -44,7 +44,8 @@ export default {
           icon: "mdi-view-dashboard",
           to: "/cabinet/lessons"
         },
-        { title: "Settings", icon: "mdi-shield-lock", to: "/cabinet/settings" }
+        { title: "Settings", icon: "mdi-shield-lock", to: "/cabinet/settings" },
+        { title: "Exit", icon: "mdi-exit-run", to: "Exit" }
       ],
       right: null
     };
@@ -55,6 +56,14 @@ export default {
     })
   },
   methods: {
+    goTo(path) {
+      if (path === "Exit") {
+        localStorage.removeItem("user");
+        this.$router.push("/");
+      } else {
+        this.$router.push(path);
+      }
+    },
     toggleMenu() {
       this.drawer = !this.drawer;
     }
