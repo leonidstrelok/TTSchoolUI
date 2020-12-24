@@ -1,27 +1,42 @@
 <template>
-  <v-dialog v-model="dialog" persistent max-width="290">
-    <template v-slot:activator="{ on, attrs }">
-      <v-btn :disabled="ready" block v-bind="attrs" v-on="on">Reserve</v-btn>
-    </template>
-    <v-card>
-      <v-card-title class="headline">Reserve this time?</v-card-title>
-      <v-card-text>
-        <h1 class="date">{{ date | formatDate }}</h1>
-        <div class="time_flex">
-          <h2 class="date">{{ startTime | formatTime }} - {{ endTime | formatTime }}</h2>
-        </div>
-      </v-card-text>
-      <v-card-actions>
-        <v-spacer></v-spacer>
-        <v-btn color="green darken-1" text @click="dialog = false">Agree</v-btn>
-        <v-btn color="green darken-1" text @click="dialog = false">Disagree</v-btn>
-      </v-card-actions>
-    </v-card>
-  </v-dialog>
+  <div>
+    <v-dialog v-model="dialog" persistent max-width="290">
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn :disabled="ready" block v-bind="attrs" v-on="on">Reserve</v-btn>
+      </template>
+      <v-card>
+        <v-card-title class="headline">Reserve this time?</v-card-title>
+        <v-card-text>
+          <h1 class="date">{{ date | formatDate }}</h1>
+          <div class="time_flex">
+            <h2 class="date">{{ startTime | formatTime }} - {{ endTime | formatTime }}</h2>
+          </div>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="green darken-1" text @click="registrateTime">Agree</v-btn>
+          <v-btn color="red darken-1" text @click="dialog = false">Disagree</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+    <v-snackbar color="green" v-model="snackbar">
+      Reserved
+      <template v-slot:action="{ attrs }">
+        <v-btn color="white" text v-bind="attrs" @click="snackbar = false">Close</v-btn>
+      </template>
+    </v-snackbar>
+    <v-snackbar color="green" v-model="snackbar">
+      Error
+      <template v-slot:action="{ attrs }">
+        <v-btn color="white" text v-bind="attrs" @click="snackbarError = false">Close</v-btn>
+      </template>
+    </v-snackbar>
+  </div>
 </template>
 
 <script>
 import moment from "moment";
+import dataApi from "@/infrastructure/data-api.js";
 export default {
   props: {
     ready: {
@@ -34,7 +49,9 @@ export default {
   },
   data() {
     return {
-      dialog: false
+      dialog: false,
+      snackbar: false,
+      snackbarError: false
     };
   },
   filters: {
@@ -45,6 +62,19 @@ export default {
     formatTime(value) {
       moment.locale("ru");
       return moment(value).format("LT");
+    }
+  },
+  methods: {
+    async registrateTime() {
+      try {
+        await this.$axios.get(dataApi.lessons.registrateTime);
+        this.dialog = false;
+        this.snackbar = true;
+      } catch (error) {
+        console.log(error);
+        this.dialog = false;
+        this.snackbarError = true;
+      }
     }
   }
 };

@@ -4,7 +4,7 @@
       <v-progress-linear color="deep-purple" height="10" indeterminate></v-progress-linear>
     </template>
 
-    <v-img contain height="250" :src="`img/${lesson.img}`"></v-img>
+    <v-img contain height="250" :lazy-src="`img/${lesson.img}`" :src="`img/${lesson.img}`"></v-img>
 
     <v-card-title>{{lesson.name}}</v-card-title>
 

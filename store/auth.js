@@ -15,17 +15,21 @@ const obj = {
   },
   actions: {
     async post_access_token({ commit }, payload) {
-      const { data } = await this.$axios.post(dataApi.auth.login, payload,{
-        headers: { 
+      const { data } = await this.$axios.post(dataApi.auth.login, payload, {
+        headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
         }
       });
       commit("SET_ACCESS_TOKEN", data.access_token);
       return data.access_token;
     },
-    async post_registration({}, payload){
+    async post_registration({ }, payload) {
       await this.$axios.post(dataApi.auth.registration, payload);
-    }
+    },
+    async change_password({ }, payload) {
+      await this.$axios.post(dataApi.auth.changePassword, payload);
+    },
+
   }
 };
 

@@ -41,6 +41,7 @@
 
 <script>
 import moment from "moment";
+import dataApi from "@/infrastructure/data-api.js";
 import ReserveBtn from "~/components/lessons/reserve-btn.vue";
 export default {
   components: {
@@ -134,15 +135,6 @@ export default {
       return moment(value).format("LT");
     }
   },
-  // watch: {
-  //   endTime() {
-  //     this.lessonTime.forEach(element => {
-  //       if (element.value > this.endTime) {
-  //         element.disabled = true;
-  //       }
-  //     });
-  //   }
-  // },
   methods: {
     setTitle() {
       this.lessons.forEach(element => {
@@ -192,6 +184,14 @@ export default {
       this.endTimeSelected = false;
       this.endTime = new Date(0, 0, 0, 0, 0, 0, 0);
       this.isEndTime = true;
+    }
+  },
+  async mounted() {
+    try {
+      let { data } = await this.$axios.get(dataApi.lessons.getByIdLesson);
+      // this.$router.push("/cabinet/lesson/")
+    } catch (error) {
+      console.error(error);
     }
   },
   created() {

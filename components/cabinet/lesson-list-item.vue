@@ -11,11 +11,8 @@
 
           <v-list-item-action>
             <div class="d-flex">
-              <v-btn v-if="item.canceled" icon>
-                <v-icon color="grey">mdi-information</v-icon>
-              </v-btn>
-              <v-btn @click="canceledLesson(item.id)" v-else icon>
-                <v-icon color="grey">mdi-information</v-icon>
+              <v-btn @click="canceledLesson(item.id)" v-if="!item.canceled" icon>
+                <v-icon color="grey">mdi-close-circle</v-icon>
               </v-btn>
             </div>
           </v-list-item-action>
@@ -26,6 +23,7 @@
 </template>
 
 <script>
+import dataApi from "@/infrastructure/data-api.js";
 import moment from "moment";
 export default {
   data() {
@@ -62,6 +60,14 @@ export default {
   methods: {
     canceledLesson(id) {
       console.log(id);
+    }
+  },
+  mounted() {
+    try {
+      let { data } = this.$axios.get(dataApi.lessons.getByIdLesson);
+      this.items = data;
+    } catch (error) {
+      console.error(error);
     }
   }
 };

@@ -73,20 +73,17 @@ export default {
   },
   methods: {
     ...mapActions({
-      getToken: "auth/post_access_token",
-      registration: "auth/post_registration"
+      changePassword: "auth/cahnge_password"
     }),
     async registrate() {
       let result = this.$refs.registrationForm.validate();
       if (result) {
         let reg = {
-          firstName: this.firstName,
-          lastName: this.lastName,
-          email: this.email,
-          password: this.password,
-          confirmPassword: this.verify
+          oldPassword: this.oldPassword,
+          newPassword: this.newPassword,
+          verify: this.verify
         };
-        await this.registration(reg);
+        await this.changePassword(reg);
       }
     }
   }

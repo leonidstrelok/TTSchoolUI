@@ -1,15 +1,15 @@
 <template>
   <div>
-    <RecoveryPassword />
+    <ChangePassword />
   </div>
 </template>
 
 
 <script>
-import RecoveryPassword from "~/components/cabinet/recovery-password.vue";
+import ChangePassword from "~/components/cabinet/change-password.vue";
 export default {
   components: {
-    RecoveryPassword
+    ChangePassword
   },
   layout: "cabinet"
 };

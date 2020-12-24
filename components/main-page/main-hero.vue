@@ -12,7 +12,14 @@
     >
       <v-carousel-item v-for="(slide, i) in slides" :key="i">
         <div :style="'backgroundColor:'+slide.bgcolor" class="img_wrapper">
-          <v-img position="center" contain :src="slide.img" max-width="100%" max-height="100%"></v-img>
+          <v-img
+            position="center"
+            contain
+            :src="slide.img"
+            :lazy-src="slide.img"
+            max-width="100%"
+            max-height="100%"
+          ></v-img>
         </div>
       </v-carousel-item>
     </v-carousel>
