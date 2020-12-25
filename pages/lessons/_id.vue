@@ -164,6 +164,36 @@ export default {
       return true;
     }
   },
+  watch: {
+    async date(value) {
+      try {
+        let { data } = await this.$axios.get(
+          dataApi.lessons.getByIdLesson + this.lessonId + "/" + this.date
+        );
+        if (data.length == 0) {
+          this.lessonTime.forEach(time => {
+            time.disabled = false;
+          });
+        }
+        data.forEach(element => {
+          element.reservedTime.forEach(item => {
+            this.lessonTime.forEach(time => {
+              if (item.startTimeLesson == moment(time.value).format("LT")) {
+                time.disabled = true;
+              }
+              if (item.endTimeLesson == moment(time.value).format("LT")) {
+                time.disabled = true;
+              }
+            });
+            // console.log(item.startTimeLesson);
+            // console.log(item.endTimeLesson);
+          });
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  },
   filters: {
     formatDate(value) {
       moment.locale("ru");
@@ -217,11 +247,26 @@ export default {
   async mounted() {
     try {
       let { data } = await this.$axios.get(
-        dataApi.lessons.getByIdLesson + this.date + "/" + this.lessonId
+        dataApi.lessons.getByIdLesson + this.lessonId + "/" + this.date
       );
-
-      this.lessonTime.forEach(element => {
-        console.log(moment(element.value).format("LT"));
+      if (data.length == 0) {
+        this.lessonTime.forEach(time => {
+          time.disabled = false;
+        });
+      }
+      data.forEach(element => {
+        element.reservedTime.forEach(item => {
+          this.lessonTime.forEach(time => {
+            if (item.startTimeLesson == moment(time.value).format("LT")) {
+              time.disabled = true;
+            }
+            if (item.endTimeLesson == moment(time.value).format("LT")) {
+              time.disabled = true;
+            }
+          });
+          // console.log(item.startTimeLesson);
+          // console.log(item.endTimeLesson);
+        });
       });
     } catch (error) {
       console.error(error);
@@ -246,6 +291,7 @@ export default {
   flex-direction: column;
 }
 .time_wrapper {
+  margin: 0 20px;
   display: flex;
   justify-content: center;
 }

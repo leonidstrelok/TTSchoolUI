@@ -9,7 +9,13 @@
     </v-card>
     <div class="cont">
       <div class="contacts">
-        <v-btn v-for="(item, index) in contacts" :key="index" class="mx-4" icon>
+        <v-btn
+          v-for="(item, index) in contacts"
+          :href="'mailto:' + item.to"
+          :key="index"
+          class="mx-4"
+          icon
+        >
           <v-icon size="30px">{{ item.icon }}</v-icon>
         </v-btn>
       </div>
@@ -34,11 +40,12 @@ export default {
     active: false,
     contacts: [
       {
-        icon: "mdi-vk"
-      },
-      {
-        icon: "mdi-youtube"
+        icon: "mdi-email",
+        link: "merwlearningcenter@gmail.com"
       }
+      // {
+      //   icon: "mdi-youtube"
+      // }
     ],
     items: [
       {
@@ -69,6 +76,9 @@ export default {
         this.active = false;
       }, 100);
     }
+  },
+  methods: {
+    goTo(link) {}
   },
   created() {
     document.addEventListener("scroll", e => {

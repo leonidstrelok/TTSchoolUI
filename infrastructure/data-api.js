@@ -8,8 +8,10 @@ export default {
         forgotPassword: "/api/Account/forgotPassword/",
     },
     lessons: {
+        getUserLessons: "/api/Student", // GET
+        cancelLesson: "/api/Student/cancelLesson", // GET
         getAllLessons: "/api/shared", // GET
-        getByIdLesson: "/api/Student/getLessonByDay/",
+        getByIdLesson: "/api/Shared/getByIdBusyHoursLesson/",
         registrateTime: "/api/Student"
     }
 }
