@@ -83,7 +83,6 @@ export default {
             startTimeLesson: moment(this.startTime).format("LT")
           }
         };
-        console.log(this.user);
         await this.$axios.post(dataApi.lessons.registrateTime, time);
         this.$router.push("/cabinet/lessons/" + this.user.userIdentifier);
         this.dialog = false;

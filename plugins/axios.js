@@ -1,6 +1,7 @@
 export default function ({ $axios, redirect, app: { store, i18n } }) {
   $axios.setBaseURL(process.env.serverUrl)
   $axios.onError(error => {
+    console.log(error);
     if (error.response.status === 500) {
       redirect('/sorry')
     }

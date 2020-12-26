@@ -26,8 +26,8 @@ const obj = {
     async post_registration({ }, payload) {
       await this.$axios.post(dataApi.auth.registration, payload);
     },
-    async change_password({ }, { email, payload }) {
-      await this.$axios.post(dataApi.auth.changePassword + email, payload);
+    async change_password({ }, payload) {
+      await this.$axios.post(dataApi.auth.changePassword, payload);
     },
     async forgot_password({ }, email) {
       await this.$axios.post(dataApi.auth.forgotPassword + email);

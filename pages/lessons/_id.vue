@@ -15,7 +15,8 @@
     <div class="time_wrapper">
       <v-chip-group column>
         <v-chip
-          :disabled="time.disabled"
+          :disabled="time.disabled || time.bussy"
+          :class="{'red' : time.bussy}"
           @click="setTime(time.value)"
           v-for="(time,index) in lessonTime"
           :key="index"
@@ -65,43 +66,53 @@ export default {
       lessonTime: [
         {
           value: new Date(0, 0, 0, 8, 0, 0, 0),
-          disabled: false
+          disabled: false,
+          bussy: false
         },
         {
           value: new Date(0, 0, 0, 9, 0, 0, 0),
-          disabled: false
+          disabled: false,
+          bussy: false
         },
         {
           value: new Date(0, 0, 0, 10, 0, 0, 0),
-          disabled: false
+          disabled: false,
+          bussy: false
         },
         {
           value: new Date(0, 0, 0, 11, 0, 0, 0),
-          disabled: false
+          disabled: false,
+          bussy: false
         },
         {
           value: new Date(0, 0, 0, 12, 0, 0, 0),
-          disabled: false
+          disabled: false,
+          bussy: false
         },
         {
           value: new Date(0, 0, 0, 13, 0, 0, 0),
-          disabled: false
+          disabled: false,
+          bussy: false
         },
         {
           value: new Date(0, 0, 0, 14, 0, 0, 0),
-          disabled: false
+          disabled: false,
+          bussy: false
         },
         {
           value: new Date(0, 0, 0, 15, 0, 0, 0),
-          disabled: false
+          disabled: false,
+          bussy: false
         },
         {
           value: new Date(0, 0, 0, 16, 0, 0, 0),
-          disabled: false
+          disabled: false,
+          bussy: false
         },
         {
           value: new Date(0, 0, 0, 17, 0, 0, 0),
-          disabled: false
+          disabled: false,
+          bussy: false
         }
       ],
       lessons: [
@@ -172,21 +183,27 @@ export default {
         );
         if (data.length == 0) {
           this.lessonTime.forEach(time => {
-            time.disabled = false;
+            time.bussy = false;
           });
         }
         data.forEach(element => {
           element.reservedTime.forEach(item => {
-            this.lessonTime.forEach(time => {
+            let startIndex;
+            let endIndex;
+            this.lessonTime.forEach((time, index) => {
               if (item.startTimeLesson == moment(time.value).format("LT")) {
-                time.disabled = true;
+                startIndex = index;
+                time.bussy = true;
               }
               if (item.endTimeLesson == moment(time.value).format("LT")) {
-                time.disabled = true;
+                endIndex = index;
+                time.bussy = true;
               }
             });
-            // console.log(item.startTimeLesson);
-            // console.log(item.endTimeLesson);
+
+            for (startIndex; startIndex < endIndex; startIndex++) {
+              this.lessonTime[startIndex].bussy = true;
+            }
           });
         });
       } catch (error) {
@@ -251,21 +268,27 @@ export default {
       );
       if (data.length == 0) {
         this.lessonTime.forEach(time => {
-          time.disabled = false;
+          time.bussy = false;
         });
       }
       data.forEach(element => {
         element.reservedTime.forEach(item => {
-          this.lessonTime.forEach(time => {
+          let startIndex;
+          let endIndex;
+          this.lessonTime.forEach((time, index) => {
             if (item.startTimeLesson == moment(time.value).format("LT")) {
-              time.disabled = true;
+              startIndex = index;
+              time.bussy = true;
             }
             if (item.endTimeLesson == moment(time.value).format("LT")) {
-              time.disabled = true;
+              endIndex = index;
+              time.bussy = true;
             }
           });
-          // console.log(item.startTimeLesson);
-          // console.log(item.endTimeLesson);
+
+          for (startIndex; startIndex < endIndex; startIndex++) {
+            this.lessonTime[startIndex].bussy = true;
+          }
         });
       });
     } catch (error) {

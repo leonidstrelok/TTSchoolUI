@@ -4,7 +4,7 @@ export default {
         registration: "/api/Account", // POST
         logout: "/api/logout", // POST
         check: "/connect/userinfo", //GET,
-        changePassword: "/api/Account/forgotPassword/",
+        changePassword: "/api/Account/changePassword",
         forgotPassword: "/api/Account/forgotPassword/",
     },
     lessons: {

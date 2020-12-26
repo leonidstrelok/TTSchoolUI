@@ -16,9 +16,7 @@
 
             <v-list-item-action>
               <div class="d-flex">
-                <v-btn @click="canceledLesson(item,time)" v-if="time.busy" icon>
-                  <v-icon color="grey">mdi-close-circle</v-icon>
-                </v-btn>
+                <cancel-btn @cancel="canceledLesson(item,time)" v-if="time.busy" />
               </div>
             </v-list-item-action>
           </v-list-item>
@@ -30,8 +28,13 @@
 
 <script>
 import dataApi from "@/infrastructure/data-api.js";
+import cancelBtn from "~/components/cabinet/cancel-btn.vue";
+
 import moment from "moment";
 export default {
+  components: {
+    cancelBtn
+  },
   data() {
     return {
       selectedItem: 1,
@@ -76,13 +79,19 @@ export default {
       });
       return name;
     },
-    canceledLesson(item, time) {
-      this.$axios.post(dataApi.lessons.cancelLesson, {
+    async canceledLesson(item, time) {
+      await this.$axios.post(dataApi.lessons.cancelLesson, {
         id: time.lessonId,
         startDateLesson: item.reservedDate,
         startTimeLesson: time.startTimeLesson,
         endTimeLesson: time.endTimeLesson
       });
+      try {
+        let { data } = await this.$axios.get(dataApi.lessons.getUserLessons);
+        this.items = data;
+      } catch (error) {
+        console.error(error);
+      }
     }
   },
   async created() {

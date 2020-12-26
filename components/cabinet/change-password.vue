@@ -83,14 +83,10 @@ export default {
       let result = this.$refs.registrationForm.validate();
       if (result) {
         let reg = {
-          oldPassword: this.oldPassword,
-          newPassword: this.newPassword,
-          verify: this.verify
+          currentPassword: this.oldPassword,
+          password: this.newPassword
         };
-        await this.changePassword({
-          email: this.user.preferred_username,
-          payload: reg
-        });
+        await this.changePassword(reg);
       }
     }
   }
