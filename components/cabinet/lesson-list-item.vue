@@ -29,6 +29,7 @@
 <script>
 import dataApi from "@/infrastructure/data-api.js";
 import cancelBtn from "~/components/cabinet/cancel-btn.vue";
+import { mapGetters } from "vuex";
 
 import moment from "moment";
 export default {
@@ -69,6 +70,9 @@ export default {
       return moment(value).format("LT");
     }
   },
+  computed: {
+    user: "user/getUser"
+  },
   methods: {
     setLessonName(id) {
       let name;
@@ -95,11 +99,22 @@ export default {
     }
   },
   async created() {
-    try {
-      let { data } = await this.$axios.get(dataApi.lessons.getUserLessons);
-      this.items = data;
-    } catch (error) {
-      console.error(error);
+    if(this.user.role == "admin"){
+
+      try {
+        let { data } = await this.$axios.get(dataApi.lessons.getAdminLessons);
+        this.items = data;
+      } catch (error) {
+        console.error(error);
+      }
+    }else{
+
+      try {
+        let { data } = await this.$axios.get(dataApi.lessons.getUserLessons);
+        this.items = data;
+      } catch (error) {
+        console.error(error);
+      }
     }
   }
 };

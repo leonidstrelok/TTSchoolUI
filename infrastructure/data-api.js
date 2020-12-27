@@ -8,6 +8,7 @@ export default {
         forgotPassword: "/api/Account/forgotPassword/",
     },
     lessons: {
+        getAdminLessons: "/api/Student", // GET
         getUserLessons: "/api/Student", // GET
         cancelLesson: "/api/Student/cancelLesson", // GET
         getAllLessons: "/api/shared", // GET
