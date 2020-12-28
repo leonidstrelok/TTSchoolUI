@@ -71,7 +71,7 @@ export default {
     }
   },
   computed: {
-    user: "user/getUser"
+    ...mapGetters({user: "user/getUser"})
   },
   methods: {
     setLessonName(id) {
@@ -98,8 +98,9 @@ export default {
       }
     }
   },
-  async created() {
-    if(this.user.role == "admin"){
+  async mounted() {
+    console.log(this.user);
+    if(this.user.role == "Admin"){
 
       try {
         let { data } = await this.$axios.get(dataApi.lessons.getAdminLessons);

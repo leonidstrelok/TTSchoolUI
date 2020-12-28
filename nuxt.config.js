@@ -1,6 +1,6 @@
 export default {
   env: {
-    serverUrl: "https://192.168.4.150:4443",
+    serverUrl: "https://mlcenter.us",
   },
   ssr: false,
 
