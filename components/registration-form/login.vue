@@ -91,7 +91,7 @@ export default {
           this.snackbar = true;
           let err = response.data.error;
           if (err === "invalid_grant") {
-            this.snackbarText = "The user is not in the system.";
+            this.snackbarText = "Incorrect login or password";
           } else {
             this.snackbarText = err;
           }

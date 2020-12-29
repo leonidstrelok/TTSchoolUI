@@ -45,11 +45,13 @@
         <v-btn x-large block color="success" @click="registrate">Change password</v-btn>
       </v-col>
     </v-row>
+    <snackbar :snackbar="snackbar" :snackbarText="snackbarText" />
   </v-form>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import snackbar from "~/components/main-component/snackbar.vue";
 export default {
   data() {
     return {
@@ -57,12 +59,14 @@ export default {
       oldPassword: "",
       newPassword: "",
       verify: "",
-      show1: false
+      show1: false,
+      snackbar: false,
+      snackbarText: ""
     };
   },
   computed: {
     ...mapGetters({
-      user: "user/getUser"
+      userInfo: "auth/getUserInfo"
     }),
     passwordMatch() {
       return () => this.newPassword === this.verify || "Password must match";
@@ -85,7 +89,24 @@ export default {
           currentPassword: this.oldPassword,
           password: this.newPassword
         };
-        await this.changePassword(reg);
+        try {
+          await this.changePassword(reg);
+          this.snackbarText = "Password changed";
+          this.snackbar = true;
+          setTimeout(() => {
+            this.$router.push(
+              `/cabinet/lessons/${this.userInfo.userIdentifier}`
+            );
+          }, 2000);
+        } catch (error) {
+          this.snackbarText = "Invalid password";
+          this.snackbar = true;
+          console.log({ error });
+        } finally {
+          setTimeout(() => {
+            this.snackbar = false;
+          }, 2000);
+        }
       }
     }
   }

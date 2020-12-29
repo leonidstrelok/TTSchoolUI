@@ -8,7 +8,7 @@ const obj = {
     },
     actions: {
         async get_lesson_by_id({ }, { lessonId, date }) {
-            const { data } = await this.$axios.post(dataApi.lessons.getLessonById + lessonId + "/" + date);
+            const { data } = await this.$axios.get(dataApi.lessons.getLessonById + lessonId + "/" + date);
             return data
         },
     }
