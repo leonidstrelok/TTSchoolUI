@@ -106,13 +106,13 @@ footer {
   flex-direction: column;
   transition: 0.3s;
   &.open {
-    max-height: 20vh;
+    max-height: 25vh;
     @include minmax(0px, 1024px) {
       max-height: 40vh;
     }
   }
   .cont {
-    padding: 20px;
+    padding: 20px 20px 30px 20px;
     border-right: 5px solid #f0f0f0;
     border-left: 5px solid #f0f0f0;
     display: grid;

@@ -8,6 +8,7 @@
     </div>
     <!-- </v-container>
     </v-main>-->
+    <script ript src="//code.jivosite.com/widget/tAFm0I2x2p" async></script>
     <my-footer />
   </v-app>
 </template>
@@ -34,8 +35,11 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .content {
   padding: 0 0 100px 0 !important;
+}
+.wrap_2d94 {
+  bottom: 10vh !important;
 }
 </style>
