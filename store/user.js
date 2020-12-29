@@ -18,7 +18,6 @@ const obj = {
     },
     mutations: {
         SET_USER(state, request) {
-            console.log(request);
             state.user = request
         }
     },

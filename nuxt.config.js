@@ -1,6 +1,7 @@
 export default {
   env: {
-    serverUrl: "https://mlcenter.us",
+    // serverUrl: "https://mlcenter.us",
+    serverUrl: "https://192.168.4.150:4443",
   },
   ssr: false,
 
@@ -43,5 +44,14 @@ export default {
   },
 
   build: {
+  },
+  router: {
+    extendRoutes(routes, resolve) {
+      routes.push({
+        name: 'custom',
+        path: '*',
+        component: resolve(__dirname, 'pages/404.vue')
+      })
+    }
   }
 }

@@ -88,7 +88,6 @@ export default {
         this.dialog = false;
         this.snackbar = true;
       } catch (error) {
-        console.log(error);
         this.dialog = false;
         this.snackbarError = true;
       }

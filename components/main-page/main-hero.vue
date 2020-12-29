@@ -1,8 +1,5 @@
 <template>
   <div class="scene">
-    <!-- <div class="main_hero_title">
-      <h1>Здесь установим заголовок и что нибудь напишем)))</h1>
-    </div>-->
     <v-carousel
       cycle
       height="90vh"

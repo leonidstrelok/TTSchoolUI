@@ -1,9 +1,9 @@
 export default {
     auth: {
+        getUserInfo: "/connect/userinfo", //GET,
         login: "/connect/token", // POST
         registration: "/api/Account", // POST
         logout: "/api/logout", // POST
-        check: "/connect/userinfo", //GET,
         changePassword: "/api/Account/changePassword",
         forgotPassword: "/api/Account/forgotPassword/",
     },
@@ -12,7 +12,7 @@ export default {
         getUserLessons: "/api/Student", // GET
         cancelLesson: "/api/Student/cancelLesson", // GET
         getAllLessons: "/api/shared", // GET
-        getByIdLesson: "/api/Shared/getByIdBusyHoursLesson/",
+        getLessonById: "/api/Shared/getByIdBusyHoursLesson/",
         registrateTime: "/api/Student",
         registrateTimeAdmin: "/api/Teacher",
         cancelLessonAdmin: "/api/Teacher/cancelLesson",

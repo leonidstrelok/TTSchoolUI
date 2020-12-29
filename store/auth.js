@@ -1,20 +1,39 @@
 import dataApi from "@/infrastructure/data-api.js";
 const obj = {
   state: {
-    accessToken: ""
+    accessToken: "",
+    userInfo: {
+      firstName: "",
+      lastName: "",
+      name: "",
+      preferred_username: "",
+      role: "",
+      sub: "",
+      userIdentifier: ""
+    }
   },
   getters: {
     getAccessToken(state) {
       return state.accessToken;
+    },
+    getUserInfo(state) {
+      return state.userInfo;
     }
   },
   mutations: {
     SET_ACCESS_TOKEN(state, request) {
       state.accessToken = request.data;
+    },
+    SET_USER_INFO(state, request) {
+      state.userInfo = request
     }
   },
   actions: {
-    async post_access_token({ commit }, payload) {
+    async get_user_info({ commit }) {
+      const { data } = await this.$axios.get(dataApi.auth.getUserInfo);
+      commit("SET_USER_INFO", data);
+    },
+    async login({ commit }, payload) {
       const { data } = await this.$axios.post(dataApi.auth.login, payload, {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
@@ -23,7 +42,7 @@ const obj = {
       commit("SET_ACCESS_TOKEN", data.access_token);
       return data.access_token;
     },
-    async post_registration({ }, payload) {
+    async registration({ }, payload) {
       await this.$axios.post(dataApi.auth.registration, payload);
     },
     async change_password({ }, payload) {

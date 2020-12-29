@@ -20,7 +20,6 @@
         </v-btn>
       </div>
       <div class="policy">
-        <!-- <a class="link">Terms of Service Agreement</a> -->
         <a class="link">
           <PrivacyPolicy />
         </a>
@@ -43,9 +42,6 @@ export default {
         icon: "mdi-email",
         link: "merwlearningcenter@gmail.com"
       }
-      // {
-      //   icon: "mdi-youtube"
-      // }
     ],
     items: [
       {

@@ -50,6 +50,7 @@
 import moment from "moment";
 import dataApi from "@/infrastructure/data-api.js";
 import ReserveBtn from "~/components/lessons/reserve-btn.vue";
+import { mapActions } from "vuex";
 export default {
   components: {
     ReserveBtn
@@ -178,9 +179,10 @@ export default {
   watch: {
     async date(value) {
       try {
-        let { data } = await this.$axios.get(
-          dataApi.lessons.getByIdLesson + this.lessonId + "/" + this.date
-        );
+        let data = await this.getLessons({
+          lessonId: this.lessonId,
+          date: this.date
+        });
         if (data.length == 0) {
           this.lessonTime.forEach(time => {
             time.bussy = false;
@@ -218,6 +220,9 @@ export default {
     }
   },
   methods: {
+    ...mapActions({
+      getLessons: "lessons/get_lesson_by_id"
+    }),
     setTime(time) {
       if (!this.isEndTime) {
         this.startTime = time;
@@ -261,11 +266,12 @@ export default {
       this.isEndTime = true;
     }
   },
-  async mounted() {
+  async created() {
     try {
-      let { data } = await this.$axios.get(
-        dataApi.lessons.getByIdLesson + this.lessonId + "/" + this.date
-      );
+      let data = await this.getLessons({
+        lessonId: this.lessonId,
+        date: this.date
+      });
       if (data.length == 0) {
         this.lessonTime.forEach(time => {
           time.bussy = false;
@@ -294,8 +300,6 @@ export default {
     } catch (error) {
       console.error(error);
     }
-  },
-  created() {
     this.lessons.forEach(element => {
       if (element.id === this.$route.params.id) {
         this.title = element.name;

@@ -17,11 +17,9 @@
 .photo_paralax {
   .v-parallax {
     text-align: center;
-    // min-height: 90vh !important;
   }
   .v-parallax__content {
     padding: 20px;
-    // color: rgba(2, 2, 2, 0.904);
   }
   .advantage_description {
     margin: 30px 0 0 0;

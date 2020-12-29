@@ -10,7 +10,11 @@
             :key="index"
           >
             <v-list-item-content>
-              <v-list-item-title>{{time.startTimeLesson }} : {{time.endTimeLesson }}</v-list-item-title>
+              <v-list-item-title>
+                <span>{{time.startTimeLesson }} : {{time.endTimeLesson }}</span>
+                <span v-if="isAdmin">{{user.firstName}}{{user.lastName}}</span>
+                <div v-if="isAdmin">{{user.name}}</div>
+              </v-list-item-title>
               <v-list-item-subtitle v-text="setLessonName(time.lessonId)"></v-list-item-subtitle>
             </v-list-item-content>
 
@@ -71,7 +75,15 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({user: "user/getUser"})
+    ...mapGetters({ userInfo: "auth/getUserInfo" }),
+    isAdmin() {
+      return this.userInfo.role == "Admin";
+    },
+    address() {
+      return this.isAdmin
+        ? dataApi.lessons.getAdminLessons
+        : dataApi.lessons.getUserLessons;
+    }
   },
   methods: {
     setLessonName(id) {
@@ -91,7 +103,7 @@ export default {
         endTimeLesson: time.endTimeLesson
       });
       try {
-        let { data } = await this.$axios.get(dataApi.lessons.getUserLessons);
+        let { data } = await this.$axios.get(this.address);
         this.items = data;
       } catch (error) {
         console.error(error);
@@ -99,23 +111,11 @@ export default {
     }
   },
   async mounted() {
-    console.log(this.user);
-    if(this.user.role == "Admin"){
-
-      try {
-        let { data } = await this.$axios.get(dataApi.lessons.getAdminLessons);
-        this.items = data;
-      } catch (error) {
-        console.error(error);
-      }
-    }else{
-
-      try {
-        let { data } = await this.$axios.get(dataApi.lessons.getUserLessons);
-        this.items = data;
-      } catch (error) {
-        console.error(error);
-      }
+    try {
+      let { data } = await this.$axios.get(this.address);
+      this.items = data;
+    } catch (error) {
+      console.error(error);
     }
   }
 };

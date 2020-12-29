@@ -50,7 +50,6 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-// getUser
 export default {
   data() {
     return {
