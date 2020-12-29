@@ -21,9 +21,9 @@
           <v-tab-item>
             <registration />
           </v-tab-item>
-          <v-tab-item>
+          <!-- <v-tab-item>
             <forgotPassword />
-          </v-tab-item>
+          </v-tab-item> -->
         </v-tabs>
       </div>
     </div>
@@ -51,7 +51,7 @@ export default {
       return [
         { name: "Login", icon: "mdi-account" },
         { name: "Register", icon: "mdi-account-outline" },
-        { name: "Forgot", icon: "mdi-shield-account-outline" }
+        // { name: "Forgot", icon: "mdi-shield-account-outline" }
       ];
     }
   },
