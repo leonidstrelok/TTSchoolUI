@@ -10,6 +10,7 @@ export default {
     lessons: {
         getAdminLessons: "/api/Teacher", // GET
         getUserLessons: "/api/Student", // GET
+        getAllUsers: "/api/Teacher/getAllUsers",
         cancelLesson: "/api/Student/cancelLesson", // GET
         getAllLessons: "/api/shared", // GET
         getLessonById: "/api/Shared/getByIdBusyHoursLesson/",

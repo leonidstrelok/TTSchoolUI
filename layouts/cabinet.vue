@@ -29,6 +29,7 @@ export default {
   async created() {
     try {
       await this.getUserInfo();
+      this.$router.push("/cabinet/lessons/" + this.userInfo.userIdentifier);
     } catch (error) {
       console.log(error);
     }

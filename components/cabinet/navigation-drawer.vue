@@ -44,7 +44,11 @@ export default {
           icon: "mdi-view-dashboard",
           to: "/cabinet/lessons"
         },
-        { title: "Settings", icon: "mdi-shield-lock", to: "/cabinet/settings" },
+        {
+          title: "Settings",
+          icon: "mdi-shield-lock",
+          to: "/cabinet/settings"
+        },
         { title: "Exit", icon: "mdi-exit-run", to: "Exit" }
       ],
       right: null
@@ -66,6 +70,28 @@ export default {
     },
     toggleMenu() {
       this.drawer = !this.drawer;
+    }
+  },
+  created() {
+    if (this.user.role == "Admin") {
+      this.items = [
+        {
+          title: "Lessons",
+          icon: "mdi-view-dashboard",
+          to: "/cabinet/lessons"
+        },
+        {
+          title: "Users",
+          icon: "mdi-library",
+          to: "/cabinet/users"
+        },
+        {
+          title: "Settings",
+          icon: "mdi-shield-lock",
+          to: "/cabinet/settings"
+        },
+        { title: "Exit", icon: "mdi-exit-run", to: "Exit" }
+      ];
     }
   }
 };
