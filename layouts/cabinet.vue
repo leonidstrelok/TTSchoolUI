@@ -1,5 +1,5 @@
 <template>
-  <v-app light>
+  <v-app light v-if="userInfo">
     <CabinetNavigation />
     <div class="content">
       <nuxt />
@@ -11,12 +11,15 @@
 <script>
 import CabinetNavigation from "~/components/cabinet/navigation-drawer.vue";
 import MyFooter from "~/components/main-component/my-footer.vue";
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   components: {
     CabinetNavigation,
     MyFooter
+  },
+  computed: {
+    ...mapGetters({ userInfo: "auth/getUserInfo" })
   },
   methods: {
     ...mapActions({

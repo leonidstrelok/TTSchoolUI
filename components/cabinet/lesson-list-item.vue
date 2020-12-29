@@ -77,7 +77,7 @@ export default {
   computed: {
     ...mapGetters({ userInfo: "auth/getUserInfo" }),
     isAdmin() {
-      return this.userInfo.role == "Admin";
+      return this.userInfo.role === "Admin";
     },
     address() {
       return this.isAdmin
@@ -112,6 +112,7 @@ export default {
   },
   async mounted() {
     try {
+      console.log(this.address);
       let { data } = await this.$axios.get(this.address);
       this.items = data;
     } catch (error) {

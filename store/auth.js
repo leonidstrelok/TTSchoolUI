@@ -2,15 +2,7 @@ import dataApi from "@/infrastructure/data-api.js";
 const obj = {
   state: {
     accessToken: "",
-    userInfo: {
-      firstName: "",
-      lastName: "",
-      name: "",
-      preferred_username: "",
-      role: "",
-      sub: "",
-      userIdentifier: ""
-    }
+    userInfo: null
   },
   getters: {
     getAccessToken(state) {
