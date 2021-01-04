@@ -226,20 +226,28 @@ export default {
     setTime(time) {
       if (!this.isEndTime) {
         this.startTime = time;
-        this.startTimeSelected = true;
-        this.lessonTime.forEach(element => {
-          if (element.value < time) {
-            element.disabled = true;
-          }
-        });
+        if (this.startTime == this.endTime) {
+          this.startTime = new Date(0, 0, 0, 0, 0, 0, 0);
+        } else {
+          this.startTimeSelected = true;
+          this.lessonTime.forEach(element => {
+            if (element.value < time) {
+              element.disabled = true;
+            }
+          });
+        }
       } else {
         this.endTime = time;
-        this.endTimeSelected = true;
-        this.lessonTime.forEach(element => {
-          if (element.value > time) {
-            element.disabled = true;
-          }
-        });
+        if (this.startTime == this.endTime) {
+          this.endTime = new Date(0, 0, 0, 0, 0, 0, 0);
+        } else {
+          this.endTimeSelected = true;
+          this.lessonTime.forEach(element => {
+            if (element.value > time) {
+              element.disabled = true;
+            }
+          });
+        }
       }
     },
     setStartTime() {
