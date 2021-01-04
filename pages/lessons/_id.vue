@@ -227,7 +227,7 @@ export default {
       if (!this.isEndTime) {
         this.startTime = time;
         if (this.startTime == this.endTime) {
-          this.startTime = new Date(0, 0, 0, 0, 0, 0, 0);
+          this.setStartTime();
         } else {
           this.startTimeSelected = true;
           this.lessonTime.forEach(element => {
@@ -239,7 +239,7 @@ export default {
       } else {
         this.endTime = time;
         if (this.startTime == this.endTime) {
-          this.endTime = new Date(0, 0, 0, 0, 0, 0, 0);
+          this.setEndTime();
         } else {
           this.endTimeSelected = true;
           this.lessonTime.forEach(element => {
