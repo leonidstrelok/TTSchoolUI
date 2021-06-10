@@ -16,7 +16,7 @@
     "moment": "^2.29.1",
     "nuxt": "^2.14.6",
     "nuxt-i18n": "^6.5.0",
-    "oidc-client": "^1.10.1",
+    "oidc-client": "^1.11.5",
     "vuex-oidc": "^3.10.1"
   },
   "devDependencies": {
